@@ -1,11 +1,4 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
---
--- File Tree
 return {
-  -- Auto-session manager
   {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v3.x',
@@ -71,6 +64,15 @@ return {
         winbar = {},
         inactive_winbar = {},
         extensions = {},
+      }
+    end,
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        open_mapping = [[<c-t>]],
       }
     end,
   },

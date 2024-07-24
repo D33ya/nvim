@@ -74,7 +74,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 15
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -726,16 +726,6 @@ require('lazy').setup({
     config = function()
       require('render-markdown').setup {}
     end,
-  },
-
-  {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    opts = {
-      open_mapping = [[<leader>t]],
-      insert_mappings = false,
-      terminal_mappings = false,
-    },
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
