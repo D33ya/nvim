@@ -10,17 +10,57 @@ return {
     },
   },
   {
-    'rmagatti/auto-session',
-    dependencies = {
-      'nvim-telescope/telescope.nvim', -- Only needed if you want to use sesssion lens
-    },
+    'nvim-neorg/neorg',
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = '*', -- Pin Neorg to the latest stable release
     config = function()
-      require('auto-session').setup {
-        auto_session_suppress_dirs = { '~/Projects', '~/Downloads', '/' },
-        auto_session_enable_last_session = vim.loop.cwd() == vim.loop.os_homedir(),
+      require('neorg').setup {
+        load = {
+          ['core.defaults'] = {},
+          ['core.concealer'] = {
+            config = {
+              icon_preset = 'diamond',
+            },
+          },
+          ['core.dirman'] = {
+            config = {
+              workspaces = {
+                main = '~/org',
+                notes = '~/Documents/notes',
+              },
+              default_workspace = 'notes',
+            },
+          },
+          ['core.summary'] = {},
+          ['core.completion'] = {
+            config = {
+              engine = 'nvim-cmp',
+            },
+          },
+          ['core.integrations.nvim-cmp'] = {},
+        },
       }
     end,
   },
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require('auto-session').setup {
+        auto_session_suppress_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
+        session_lens = {
+          buftypes_to_ignore = {},
+          load_on_setup = true,
+          theme_conf = { border = true },
+          previewer = false,
+        },
+      }
+
+      vim.keymap.set('n', '<Leader>ls', require('auto-session.session-lens').search_session, {
+        noremap = true,
+      })
+    end,
+  },
+
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -75,5 +115,10 @@ return {
         open_mapping = [[<c-t>]],
       }
     end,
+  },
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
 }
