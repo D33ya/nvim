@@ -25,10 +25,9 @@ return {
           ['core.dirman'] = {
             config = {
               workspaces = {
-                main = '~/org',
-                notes = '~/Documents/notes',
+                work_notes = '~/Documents/notes',
               },
-              default_workspace = 'notes',
+              default_workspace = 'work_notes',
             },
           },
           ['core.summary'] = {},
