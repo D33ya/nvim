@@ -33,6 +33,7 @@ return {
             config = {
               workspaces = {
                 work_notes = '~/Documents/notes',
+                library_of_norgxandria = 'Documents/library-of-norgxandria',
               },
               default_workspace = 'work_notes',
             },
