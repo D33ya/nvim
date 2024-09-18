@@ -17,6 +17,13 @@ return {
       require('neorg').setup {
         load = {
           ['core.defaults'] = {},
+          ['core.esupports.metagen'] = {
+            config = {
+              author = 'Danny',
+              type = 'auto',
+              timezone = 'implicit-local',
+            },
+          },
           ['core.concealer'] = {
             config = {
               icon_preset = 'diamond',
@@ -34,12 +41,19 @@ return {
           ['core.completion'] = {
             config = {
               engine = 'nvim-cmp',
+              name = '[Neorg]',
             },
           },
           ['core.integrations.nvim-cmp'] = {},
+          ['core.integrations.telescope'] = {},
         },
+        dependencies = { { 'nvim-lua/plenary.nvim' }, { 'nvim-neorg/neorg-telescope' } },
       }
     end,
+  },
+  {
+    'nvim-neorg/neorg-telescope',
+    lazy = false,
   },
   {
     'rmagatti/auto-session',
