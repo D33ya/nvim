@@ -20,30 +20,12 @@ return {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      -- { 'nvim-telescope/telescope-project.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
-      -- Telescope is a fuzzy finder that comes with a lot of different things that
-      -- it can fuzzy find! It's more than just a "file finder", it can search
-      -- many different aspects of Neovim, your workspace, LSP, and more!
-      --
-      -- The easiest way to use Telescope, is to start by doing something like:
-      --  :Telescope help_tags
-      --
-      -- After running this command, a window will open up and you're able to
-      -- type in the prompt window. You'll see a list of `help_tags` options and
-      -- a corresponding preview of the help.
-      --
-      -- Two important keymaps to use while in Telescope are:
-      --  - Insert mode: <c-/>
-      --  - Normal mode: ?
-      --
-      -- This opens a window that shows you all of the keymaps for the current
-      -- Telescope picker. This is really useful to discover what Telescope can
-      -- do as well as how to actually do it!
-
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
@@ -60,12 +42,19 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          project = {
+            base_dirs = {
+              { '~/projects/', max_depth = 2 },
+            },
+          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'project')
+      pcall(require('telescope').load_extension 'file_browser')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -100,8 +89,59 @@ return {
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config' }
+        builtin.find_files { cwd = vim.fn.stdpath 'config', hidden = true }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>sd', function()
+        builtin.find_files { cwd = '~/.config/' }
+      end, { desc = '[S]earch [D]ot files' })
+
+      vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = '[F]ile, [B]rowser' })
+
+      vim.keymap.set('n', '<leader>sp', function()
+        require('telescope').extensions.project.project { display_type = 'full' }
+      end, { desc = '[S]earch [P]rojects' })
+    end,
+  },
+  { 'nvim-telescope/telescope-project.nvim' },
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'doctorfree/cheatsheet.nvim',
+    event = 'VeryLazy',
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-lua/plenary.nvim' },
+    },
+    config = function()
+      local ctactions = require 'cheatsheet.telescope.actions'
+      require('cheatsheet').setup {
+        bundled_cheetsheets = {
+          enabled = { 'default', 'lua', 'markdown', 'regex', 'netrw', 'unicode' },
+          disabled = { 'nerd-fonts' },
+        },
+        bundled_plugin_cheatsheets = {
+          enabled = {
+            'auto-session',
+            'goto-preview',
+            'octo.nvim',
+            'telescope.nvim',
+            'vim-easy-align',
+            'vim-sandwich',
+          },
+          disabled = { 'gitsigns' },
+        },
+        include_only_installed_plugins = true,
+        telescope_mappings = {
+          ['<CR>'] = ctactions.select_or_fill_commandline,
+          ['<A-CR>'] = ctactions.select_or_execute,
+          ['<C-Y>'] = ctactions.copy_cheat_value,
+          ['<C-E>'] = ctactions.edit_user_cheatsheet,
+        },
+      }
     end,
   },
 }
