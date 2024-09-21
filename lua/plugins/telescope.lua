@@ -37,7 +37,11 @@ return {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            hidden = false,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -89,12 +93,12 @@ return {
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
-        builtin.find_files { cwd = vim.fn.stdpath 'config', hidden = true }
+        builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
 
       vim.keymap.set('n', '<leader>sd', function()
-        builtin.find_files { cwd = '~/.config/' }
-      end, { desc = '[S]earch [D]ot files' })
+        builtin.find_files { cwd = '~/.config//' }
+      end, { desc = '[S]earch [D]otfiles' })
 
       vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = '[F]ile, [B]rowser' })
 
@@ -120,8 +124,7 @@ return {
       local ctactions = require 'cheatsheet.telescope.actions'
       require('cheatsheet').setup {
         bundled_cheetsheets = {
-          enabled = { 'default', 'lua', 'markdown', 'regex', 'netrw', 'unicode' },
-          disabled = { 'nerd-fonts' },
+          enabled = { 'default', 'lua', 'markdown', 'regex', 'netrw', 'unicode', 'nerd-font' },
         },
         bundled_plugin_cheatsheets = {
           enabled = {
@@ -131,8 +134,8 @@ return {
             'telescope.nvim',
             'vim-easy-align',
             'vim-sandwich',
+            'git-signs',
           },
-          disabled = { 'gitsigns' },
         },
         include_only_installed_plugins = true,
         telescope_mappings = {
