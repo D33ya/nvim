@@ -48,7 +48,7 @@ return {
           },
           project = {
             base_dirs = {
-              { '~/projects/', max_depth = 2 },
+              { '~/Documents/rust', max_depth = 2 },
             },
           },
         },
