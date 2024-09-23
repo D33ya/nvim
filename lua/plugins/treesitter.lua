@@ -25,16 +25,16 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = 'gnn', -- set to `false` to disable one of the mappings
-            node_incremental = 'grn',
-            scope_incremental = 'grc',
-            node_decremental = 'grm',
+            init_selection = '<leader>gnn', -- set to `false` to disable one of the mappings
+            node_incremental = '<leader>grn',
+            scope_incremental = '<leader>grc',
+            node_decremental = '<leader>grm',
           },
         },
       }
 
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
   },
+--  { 'nvim-treesitter/nvim-treesitter-textobjects' },
 }

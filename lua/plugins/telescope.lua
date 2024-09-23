@@ -48,7 +48,7 @@ return {
           },
           project = {
             base_dirs = {
-              { '~/Documents/rust', max_depth = 2 },
+              { '~/dev/', max_depth = 2 },
             },
           },
         },
@@ -59,6 +59,7 @@ return {
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'project')
       pcall(require('telescope').load_extension 'file_browser')
+      pcall(require('telescope').load_extension 'neoclip')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -97,7 +98,7 @@ return {
       end, { desc = '[S]earch [N]eovim files' })
 
       vim.keymap.set('n', '<leader>sd', function()
-        builtin.find_files { cwd = '~/.config//' }
+        require('telescope-config').dotfiles()
       end, { desc = '[S]earch [D]otfiles' })
 
       vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = '[F]ile, [B]rowser' })
@@ -111,6 +112,17 @@ return {
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'AckslD/nvim-neoclip.lua',
+    dependencies = {
+      -- you'll need at least one of these
+      -- {'nvim-telescope/telescope.nvim'},
+      -- {'ibhagwan/fzf-lua'},
+    },
+    config = function()
+      require('neoclip').setup()
+    end,
   },
   {
     'doctorfree/cheatsheet.nvim',
