@@ -8,7 +8,9 @@ vim.opt.relativenumber = true
 
 -- vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 
-vim.opt.conceallevel = 3
+vim.opt.conceallevel = 2
+
+vim.wo.foldlevel = 99
 
 vim.opt.expandtab = true
 
