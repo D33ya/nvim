@@ -60,6 +60,7 @@ return {
       pcall(require('telescope').load_extension, 'project')
       pcall(require('telescope').load_extension 'file_browser')
       pcall(require('telescope').load_extension 'neoclip')
+      -- pcall(require('telescope').load_extension 'neorg')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -109,6 +110,7 @@ return {
     end,
   },
   { 'nvim-telescope/telescope-project.nvim' },
+  { 'nvim-neorg/neorg-telescope' },
   {
     'nvim-telescope/telescope-file-browser.nvim',
     dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },

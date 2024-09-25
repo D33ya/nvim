@@ -115,7 +115,7 @@ return {
         pyright = {},
         -- pylsp = {},
         -- jedi_language_server = {},
-        rust_analyzer = {},
+        -- rust_analyzer = { function() return true end },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -195,6 +195,20 @@ return {
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
       },
+    },
+  },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
+  {
+    'amrbashir/nvim-docs-view',
+    lazy = true,
+    cmd = 'DocsViewToggle',
+    opts = {
+      position = 'right',
+      width = 60,
     },
   },
 }

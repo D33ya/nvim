@@ -2,11 +2,11 @@ local M = {}
 
 M.dotfiles = function()
   local picker = require 'telescope._extensions.file_browser.picker'
-  opts = {
+  Opts = {
     cwd = '~/.config/',
     promt_title = 'Dotfiles',
   }
-  picker(opts)
+  picker(Opts)
 end
 
 return M

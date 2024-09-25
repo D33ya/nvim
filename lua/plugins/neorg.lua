@@ -16,19 +16,26 @@ return {
           },
           ['core.concealer'] = {
             config = {
+              folds = true,
               icon_preset = 'diamond',
+              init_open_folds = 'auto',
             },
           },
           ['core.dirman'] = {
             config = {
               workspaces = {
-                work_notes = '~/Documents/notes',
-                library_of_norgxandria = 'Documents/library-of-norgxandria',
+                work_notes = '~/Documents/Notes/Work',
+                library_of_norgxandria = 'Documents/Library-of-norgxandria',
+                notes = '~/Documents/Notes',
+                progaming = '~/Documents/Notes/Programing',
+                projects = '~/Documents/Notes/Projects',
               },
-              default_workspace = 'work_notes',
+              default_workspace = 'notes',
             },
           },
-          ['core.summary'] = {},
+          ['core.summary'] = {
+            strategy = 'by_path',
+          },
           ['core.completion'] = {
             config = {
               engine = 'nvim-cmp',
@@ -41,8 +48,6 @@ return {
       }
     end,
   },
-  {
-    'nvim-neorg/neorg-telescope',
-    lazy = false,
-  },
+
+  -- keymaps
 }
